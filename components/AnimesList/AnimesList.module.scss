@@ -1,0 +1,10 @@
+@use '../../styles/variables' as *; 
+
+.container {
+    margin: 0 $margin-2 0 $margin-2;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 220px);
+    justify-content: space-between;
+    column-gap: 10px;
+    row-gap: 62px;
+}

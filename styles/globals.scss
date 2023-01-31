@@ -1,0 +1,11 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+.example {
+    color: $orange-100 !important
+}
+
+body {
+    min-width: 100vw;
+    min-height: 100vh;
+}

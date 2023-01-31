@@ -1,0 +1,29 @@
+@use '../../../styles/variables' as *; 
+
+$width: 200px;
+$heihgt: 320px;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    width: $width;
+    height: $heihgt;
+    transition: all 0.5s ease-out;
+    &:hover {
+        transform: scale(1.1, 1.1);
+    }
+
+}
+
+.footer {
+    text-align: center;
+    margin-top: $default-margin;
+}
+
+.image {
+    width: 100%;
+    height: 90%;
+    border-radius: 16px;
+}

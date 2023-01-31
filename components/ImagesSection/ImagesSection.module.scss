@@ -1,0 +1,16 @@
+.imagesContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.image {
+    width: inherit !important;
+    height: inherit !important;
+    max-width: 256px;
+    max-height: 143px;
+    aspect-ratio: 256 / 143;
+    margin-right: 8px;
+    cursor: zoom-in;
+}

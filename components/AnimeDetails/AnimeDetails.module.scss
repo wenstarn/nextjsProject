@@ -1,0 +1,25 @@
+@use '../../styles/variables' as *; 
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 220px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: $margin-1;
+}
+
+.estimate {
+    width: 100px;
+}
+
+.select {
+    margin-top: $margin-2;
+}
