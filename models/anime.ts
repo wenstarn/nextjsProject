@@ -121,3 +121,11 @@ export interface AnimeDate {
   date: string
   animes: AnimeItem[]
 }
+
+export interface MyAnimeListItem {
+  id: number
+  name: string
+  score: number
+  watchedEpisodes: number
+  category: string
+}

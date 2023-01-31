@@ -1,7 +1,7 @@
 @use '../../../styles/variables' as *; 
 
 $width: 200px;
-$heihgt: 320px;
+$heihgt: 370px;
 
 .container {
     display: flex;
@@ -20,10 +20,14 @@ $heihgt: 320px;
 .footer {
     text-align: center;
     margin-top: $default-margin;
+    height: 87px;
+    overflow: hidden;
+    height: 80px;
 }
 
 .image {
     width: 100%;
     height: 90%;
+    max-height: 300px;
     border-radius: 16px;
 }

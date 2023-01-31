@@ -36,7 +36,12 @@ export default function Anime() {
     <Container>
       <Row>
         <Col xxl={2} xl={3} lg={3} md={4} sm={5} xs={5}>
-          <AnimeDetails image={result.data.image} />
+          <AnimeDetails
+            id={result.data.id}
+            image={result.data.image}
+            name={result.data.name}
+            episodes={result.data.episodes}
+          />
         </Col>
         <Col xxl={10} xl={9} lg={9} md={8} sm={7} xs={6}>
           <AnimeInfo
@@ -49,22 +54,24 @@ export default function Anime() {
           />
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <AnimeDescription description={result.data.description} />
-        </Col>
-      </Row>
+      {result.data.description && (
+        <Row>
+          <Col>
+            <AnimeDescription description={result.data.description} />
+          </Col>
+        </Row>
+      )}
       <Row>
         <Col md={5} sm={6} xs={12}>
-          <ScreenshotsSection
-            screenshotsPreview={result.data.screenshots}
-            screenshotsOriginal={screenshotsOriginal.data}
-          />
+          {result.data.screenshots.length > 0 && (
+            <ScreenshotsSection
+              screenshotsPreview={result.data.screenshots}
+              screenshotsOriginal={screenshotsOriginal.data}
+            />
+          )}
         </Col>
         <Col md={{ span: 5, offset: 2 }} sm={6} xs={12}>
-          <VideosSection
-            videos={result.data.videos}
-          />
+          {result.data.videos.length > 0 && <VideosSection videos={result.data.videos} />}
         </Col>
       </Row>
     </Container>

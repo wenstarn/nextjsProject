@@ -15,12 +15,14 @@ export default function Calendar() {
   }
 
   return (
-    <div className='text-light'>
+    <div className={`${styles.container} text-light`}>
       <h1>Календарь</h1>
       {calendar.data.map((animeDate, index) => (
-        <div className={styles.container} key={index}>
-          <h5 >{animeDate.date}</h5>
-          <AnimesList items={animeDate.animes}/>
+        <div className={styles.row} key={index}>
+          <h5>{animeDate.date}</h5>
+          <div className={styles.listContainer}>
+          <AnimesList items={animeDate.animes} />
+          </div>
         </div>
       ))}
     </div>

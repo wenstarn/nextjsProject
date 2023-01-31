@@ -23,7 +23,7 @@ export const animeApi = createApi({
   tagTypes: [],
   endpoints: (builder) => ({
     getAnimes: builder.query<AnimeItem[], number | void>({
-      query: (limit = 50) => `animes?limit=${limit}`,
+      query: (limit = 50) => `animes?limit=${limit}&order=ranked`,
       transformResponse: (response: AnimeApiResult[]) =>
         response.map((anime) => ({
           name: anime.russian,
