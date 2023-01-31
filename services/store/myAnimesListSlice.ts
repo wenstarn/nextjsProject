@@ -27,7 +27,10 @@ const myAnimesListSlice = createSlice({
   name: 'myAnimesList',
   initialState,
   reducers: {
-    changeCategory(state, action: PayloadAction<{ id: number; category: string; name: string }>) {
+    changeCategory(
+      state,
+      action: PayloadAction<{ id: number; category: string; name: string; episodes: number }>,
+    ) {
       const animeIndex = state.animes.findIndex((anime) => anime.id === action.payload.id)
       if (animeIndex === -1) {
         if (action.payload.category !== 'noCategory') {
@@ -37,6 +40,7 @@ const myAnimesListSlice = createSlice({
             name: action.payload.name,
             watchedEpisodes: 0,
             score: 0,
+            episodes: action.payload.episodes,
           })
         }
       } else if (action.payload.category === 'noCategory') {

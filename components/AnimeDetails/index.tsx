@@ -28,7 +28,17 @@ export default function AnimeDetails({
     state.myAnimesList.animes.find((anime) => anime.id === id))
   const dispatch = useAppDispatch()
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(changeCategory({ id, name, category: event.target.value }))
+    dispatch(changeCategory({
+      id, name, category: event.target.value, episodes,
+    }))
+    if (event.target.value === 'watched') {
+      dispatch(
+        changeWatchedEpisodes({
+          id,
+          watchedEpisodes: episodes,
+        }),
+      )
+    }
   }
   const router = useRouter()
   const handleAddButton = () => {
@@ -42,7 +52,9 @@ export default function AnimeDetails({
       )
     }
     if (watchedEpisodes + 1 === episodes) {
-      dispatch(changeCategory({ id, name, category: 'watched' }))
+      dispatch(changeCategory({
+        id, name, category: 'watched', episodes,
+      }))
     }
   }
   const handleRemoveButton = () => {
@@ -59,7 +71,9 @@ export default function AnimeDetails({
       myAnimeListItemExisted.watchedEpisodes - 1 < episodes &&
       myAnimeListItemExisted.category === 'watched'
     ) {
-      dispatch(changeCategory({ id, name, category: 'watching' }))
+      dispatch(changeCategory({
+        id, name, category: 'watching', episodes,
+      }))
     }
   }
   const handleScoreInput = (event: ChangeEvent<any>) => {
