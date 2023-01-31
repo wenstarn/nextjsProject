@@ -6,11 +6,19 @@
 }
 
 .image {
-    width: inherit !important;
-    height: inherit !important;
+    width: 50% !important;
+    height: 50% !important;
     max-width: 256px;
     max-height: 143px;
     aspect-ratio: 256 / 143;
     margin-right: 8px;
     cursor: zoom-in;
+}
+
+.screenshotOriginal {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 1280px;
+    max-height: 720px;
+    aspect-ratio: 16 / 9;
 }

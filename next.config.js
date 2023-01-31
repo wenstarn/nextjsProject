@@ -9,7 +9,7 @@ const nextConfig = {
         pathname: '**',
       },
       {
-        protocol: 'https',
+        protocol: 'http',
         hostname: 'img.youtube.com',
         pathname: '**',
       },

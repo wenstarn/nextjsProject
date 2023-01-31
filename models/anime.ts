@@ -24,6 +24,11 @@ export interface AnimeItem {
     image: string
 }
 
+export interface ScreenshotApiResult {
+  original: string
+  preview: string
+}
+
 export interface Video {
   id: number
   url: string
@@ -92,11 +97,27 @@ export interface AnimeDetail extends AnimeItem{
   status: string,
   episodes: number,
   episodes_aired: number,
-  videos: Video[],
+  videos: {
+    id: number,
+    url: string,
+    preview: string
+  }[],
   duration: number
   genres: {
     id: number
     name: string
   }[],
   screenshots: string[],
+}
+
+export interface AnimeDateApiResult {
+  next_episode: number
+  next_episode_at: string
+  duration: number
+  anime: AnimeApiResult
+}
+
+export interface AnimeDate {
+  date: string
+  animes: AnimeItem[]
 }

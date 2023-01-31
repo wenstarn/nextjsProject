@@ -1,0 +1,41 @@
+.imagesContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.image {
+    width: 50% !important;
+    height: 100% !important;
+    max-width: 256px;
+    max-height: 143px;
+    aspect-ratio: 256 / 143;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.link::before {
+    color: white;
+    content: "\25B6";
+    opacity: 0.5;
+    position: absolute;
+    cursor: pointer;
+    text-shadow: 0 3px black;
+    z-index: 100;
+    font-size:50px;
+    left:220px;
+    top:150px;
+    }
+
+.video {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.modal {
+    position: relative;
+}

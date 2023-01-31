@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router'
 import {
   useGetAnimeDetailsQuery,
+  useGetAnimeScreenshotsQuery,
   getAnimeDetails,
   getAnimes,
   getRunningQueriesThunk,
+  getAnimeScreenshots,
 } from '@services/api'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -11,7 +13,8 @@ import Col from 'react-bootstrap/Col'
 import { makeStore, wrapper } from '@services/store'
 import AnimeDetails from '@components/AnimeDetails'
 import AnimeInfo from '@components/AnimeInfo'
-import ImagesSection from '@components/ImagesSection'
+import ScreenshotsSection from '@components/ScreenshotsSection'
+import VideosSection from '@components/VideosSection'
 import AnimeDescription from '@components/AnimeDescription'
 
 // import styles from './Anime.module.scss'
@@ -22,7 +25,11 @@ export default function Anime() {
   const result = useGetAnimeDetailsQuery(Number(id) as number, {
     skip: router.isFallback,
   })
-  if (router.isFallback || !result.data) {
+  const screenshotsOriginal = useGetAnimeScreenshotsQuery(Number(id) as number, {
+    skip: router.isFallback,
+  })
+
+  if (router.isFallback || !result.data || !screenshotsOriginal.data) {
     return <div>Loading...</div>
   }
   return (
@@ -49,10 +56,15 @@ export default function Anime() {
       </Row>
       <Row>
         <Col md={5} sm={6} xs={12}>
-          <ImagesSection images={result.data.screenshots} />
+          <ScreenshotsSection
+            screenshotsPreview={result.data.screenshots}
+            screenshotsOriginal={screenshotsOriginal.data}
+          />
         </Col>
         <Col md={{ span: 5, offset: 2 }} sm={6} xs={12}>
-          <ImagesSection images={result.data.screenshots} />
+          <VideosSection
+            videos={result.data.videos}
+          />
         </Col>
       </Row>
     </Container>
@@ -77,6 +89,7 @@ export const getStaticProps = wrapper.getStaticProps((store) => async (context) 
   const id = context.params?.id as string | undefined
   if (id) {
     store.dispatch(getAnimeDetails.initiate(Number(id)))
+    store.dispatch(getAnimeScreenshots.initiate(Number(id)))
   }
 
   await Promise.all(store.dispatch(getRunningQueriesThunk()))
