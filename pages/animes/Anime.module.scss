@@ -1,6 +1,5 @@
 @use '../../styles/variables' as *; 
 
 .container {
-    display: flex;
-    margin: $margin-2 $margin-4 0 $margin-4;
+    margin-bottom: $margin-2;
 }

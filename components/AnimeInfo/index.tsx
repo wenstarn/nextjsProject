@@ -20,11 +20,11 @@ export default function AnimeInfo({
       <h1 className=''>{name}</h1>
       <h5 className=''>Информация: </h5>
       <ul className={styles.list}>
-        <li>Рейтинг: <span className="text-secondary">{score}</span></li>
-        <li>Тип: <span className="text-secondary">{kind}</span></li>
-        <li>Эпизоды: <span className="text-secondary">{episodes}</span></li>
-        <li>Длительность эпизода: <span className="text-secondary">{duration}</span></li>
-        <li>Жанры: {genres.map((genre) => <span key={genre.id} className="text-secondary">{genre.name}, </span>)}</li>
+        <li className={styles.item}>Рейтинг: <span className="text-secondary">{score}</span></li>
+        <li className={styles.item}>Тип: <span className="text-secondary">{kind}</span></li>
+        <li className={styles.item}>Эпизоды: <span className="text-secondary">{episodes}</span></li>
+        <li className={styles.item}>Длительность эпизода: <span className="text-secondary">{duration}</span></li>
+        <li className={styles.item}>Жанры: {genres.map((genre) => <span key={genre.id} className="text-secondary">{genre.name}, </span>)}</li>
       </ul>
     </div>
   )

@@ -16,8 +16,7 @@ import AnimeInfo from '@components/AnimeInfo'
 import ScreenshotsSection from '@components/ScreenshotsSection'
 import VideosSection from '@components/VideosSection'
 import AnimeDescription from '@components/AnimeDescription'
-
-// import styles from './Anime.module.scss'
+import styles from './Anime.module.scss'
 
 export default function Anime() {
   const router = useRouter()
@@ -33,8 +32,8 @@ export default function Anime() {
     return <div>Loading...</div>
   }
   return (
-    <Container>
-      <Row>
+    <Container className={styles.container}>
+      <Row style={{ marginBottom: '16px' }}>
         <Col xxl={2} xl={3} lg={3} md={4} sm={5} xs={5}>
           <AnimeDetails
             id={result.data.id}

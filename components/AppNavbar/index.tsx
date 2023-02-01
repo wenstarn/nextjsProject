@@ -4,10 +4,11 @@ import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Link from 'next/link'
+import styles from './AppNavbar.module.scss'
 
 function AppNavbar() {
   return (
-    <Navbar bg='dark' expand='lg' variant='dark'>
+    <Navbar className={styles.container} bg='dark' expand='lg' variant='dark'>
       <Container fluid>
         <Navbar.Brand href='#'>AnimeApp</Navbar.Brand>
         <Navbar.Toggle aria-controls='navbarScroll' />
@@ -30,8 +31,8 @@ function AppNavbar() {
             </li>
           </Nav>
           <Form className='d-flex'>
-            <Form.Control type='search' placeholder='Search' className='me-2' aria-label='Search' />
-            <Button variant='outline-light'>Search</Button>
+            <Form.Control type='search' placeholder='Поиск' className='me-2' aria-label='Search' />
+            <Button variant='outline-light'>Поиск</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

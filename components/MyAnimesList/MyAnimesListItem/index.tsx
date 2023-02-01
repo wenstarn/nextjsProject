@@ -8,7 +8,7 @@ interface Props {
 export default function MyAnimesListItem({ anime }: Props) {
   return <>
       <td className='name'>
-        <Link href={`/animes/${anime.id}`}>{anime.name}</Link>
+        <Link className='text-primary' href={`/animes/${anime.id}`}>{anime.name}</Link>
       </td>
       <td className='episodes'>
         <div className='content-wrapper'>

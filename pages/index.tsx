@@ -18,8 +18,7 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div>Hello world</div>
-      {result.data && <AnimesList items={result.data}/>}
+      <div>{result.data && <AnimesList items={result.data} />}</div>
     </>
   )
 }
