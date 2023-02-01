@@ -2,12 +2,10 @@ import { MyAnimeListItem } from '@models/anime'
 import MyAnimesListItem from './MyAnimesListItem'
 
 interface Props {
-    animes: MyAnimeListItem[]
+  animes: MyAnimeListItem[]
 }
 
-const Table = ({ animes }: Props) => {
-  console.log(animes)
-  return (
+const Table = ({ animes }: Props) => (
     <table className='table table-dark'>
       <thead>
         <tr>
@@ -27,17 +25,16 @@ const Table = ({ animes }: Props) => {
       </thead>
       <tbody>
         {animes.map((anime, index) => (
-            <tr key={anime.id}>
-              <th className='index' scope='row'>
-                {index + 1}
-              </th>
-              <MyAnimesListItem anime={anime} />
-            </tr>
+          <tr key={anime.id}>
+            <th className='index' scope='row'>
+              {index + 1}
+            </th>
+            <MyAnimesListItem anime={anime} />
+          </tr>
         ))}
       </tbody>
     </table>
-  )
-}
+)
 
 export default function MyAnimesList({ animes }: Props) {
   const scheduled = animes.filter((anime) => anime.category === 'scheduled')

@@ -79,7 +79,7 @@ export default function Anime() {
 
 export async function getStaticPaths() {
   const store = makeStore()
-  const result = await store.dispatch(getAnimes.initiate(1))
+  const result = await store.dispatch(getAnimes.initiate({ limit: 1 } as any))
 
   const paths = result.data?.map((item) => ({
     params: { id: item.id.toString() },

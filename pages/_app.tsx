@@ -5,13 +5,16 @@ import { SSRProvider } from 'react-bootstrap'
 import type { AppProps } from 'next/app'
 import { wrapper } from '@services/store'
 import Layout from '@components/Layout'
+import { SearchContextWrapper } from '@contexts/searchContext'
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <SSRProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <SearchContextWrapper>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SearchContextWrapper>
     </SSRProvider>
   )
 }

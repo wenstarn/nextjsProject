@@ -32,6 +32,7 @@
       "@services/*": ["./services/*"],
       "@styles/*": ["./styles/*"],
       "@models/*": ["./models/*"],
+      "@contexts/*": ["./contexts/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

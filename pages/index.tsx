@@ -4,10 +4,12 @@ import { wrapper } from '@services/store'
 import { getAnimes, getRunningQueriesThunk, useGetAnimesQuery } from '@services/api'
 import { useRouter } from 'next/router'
 import AnimesList from '@components/AnimesList'
+import { useSearchContext } from '@contexts/searchContext'
 
 export default function Home() {
   const router = useRouter()
-  const result = useGetAnimesQuery(undefined, {
+  const { search } = useSearchContext()
+  const result = useGetAnimesQuery({ search } as any, {
     skip: router.isFallback,
   })
   return (
@@ -24,7 +26,7 @@ export default function Home() {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
-  store.dispatch(getAnimes.initiate())
+  store.dispatch(getAnimes.initiate({} as any))
   await Promise.all(store.dispatch(getRunningQueriesThunk()))
   return {
     props: {},
