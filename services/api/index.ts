@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable consistent-return */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
@@ -10,6 +11,7 @@ import {
   AnimeDate,
   AnimeDateApiResult,
 } from '@models/anime'
+import { RootState } from '@services/store'
 
 export const animeApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -22,8 +24,12 @@ export const animeApi = createApi({
   },
   tagTypes: [],
   endpoints: (builder) => ({
-    getAnimes: builder.query<AnimeItem[], {search: string | undefined, limit: number | undefined}>({
-      query: ({ limit = 50, search = '' }) => `animes?limit=${limit}&order=ranked&search=${search}`,
+    getAnimes: builder.query<
+      AnimeItem[],
+      { search: string | undefined; limit: number | undefined; page: number }
+    >({
+      query: ({ limit = 50, search = '', page = 1 }) =>
+        `animes?limit=${limit}&order=ranked&search=${search}&page=${page}`,
       transformResponse: (response: AnimeApiResult[]) =>
         response.map((anime) => ({
           name: anime.russian,
@@ -111,10 +117,14 @@ export const {
   useGetAnimeDetailsQuery,
   useGetAnimeScreenshotsQuery,
   useGetAnimesCalendarQuery,
+  useLazyGetAnimesQuery,
   util: { getRunningQueriesThunk },
 } = animeApi
 
 // export endpoints for use in SSR
 export const {
   getAnimes, getAnimeDetails, getAnimeScreenshots, getAnimesCalendar,
-} = animeApi.endpoints
+} =
+  animeApi.endpoints
+
+export const selectAnimes = (state: RootState) => animeApi.endpoints.getAnimes.select({ limit: 50, search: '', page: 1 })(state).data

@@ -1,17 +1,62 @@
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/alt-text */
 import Head from 'next/head'
+import { useCallback, useRef } from 'react'
 import { wrapper } from '@services/store'
-import { getAnimes, getRunningQueriesThunk, useGetAnimesQuery } from '@services/api'
+import { getAnimes, getRunningQueriesThunk, useLazyGetAnimesQuery } from '@services/api'
 import { useRouter } from 'next/router'
 import AnimesList from '@components/AnimesList'
 import { useSearchContext } from '@contexts/searchContext'
+import useInfiniteScroll from 'hooks/useInfiniteScroll'
 
 export default function Home() {
   const router = useRouter()
   const { search } = useSearchContext()
-  const result = useGetAnimesQuery({ search } as any, {
-    skip: router.isFallback,
-  })
+  // const result = useGetAnimesQuery({ search } as any, {
+  //   skip: router.isFallback,
+  // })
+
+  const [getAnimes] = useLazyGetAnimesQuery()
+  const getValidationsLogWithPagination = useCallback(
+    (limit: number, page: number) =>
+      getAnimes({
+        limit,
+        page,
+        search,
+      } as any).unwrap(),
+    [search],
+  )
+
+  const {
+    combinedData, readMore, isFirstLoading, isAdditionalLoading,
+  } = useInfiniteScroll(
+    getValidationsLogWithPagination,
+  )
+
+  const observer = useRef<IntersectionObserver>()
+  const lastItemRef = useCallback(
+    (node: any) => {
+      if (isAdditionalLoading || isFirstLoading) {
+        return
+      }
+
+      if (observer.current) {
+        observer.current.disconnect()
+      }
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          readMore()
+        }
+      })
+
+      if (node) {
+        observer.current.observe(node)
+      }
+    },
+    [isAdditionalLoading, isFirstLoading, readMore],
+  )
+
   return (
     <>
       <Head>
@@ -20,13 +65,17 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div>{result.data && <AnimesList items={result.data} />}</div>
+      <div>
+        {Boolean(!router.isFallback) && (
+          <AnimesList lastItemRef={lastItemRef} items={combinedData} />
+        )}
+      </div>
     </>
   )
 }
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
-  store.dispatch(getAnimes.initiate({} as any))
+  store.dispatch(getAnimes.initiate({ limit: 50, search: '', page: 1 }))
   await Promise.all(store.dispatch(getRunningQueriesThunk()))
   return {
     props: {},

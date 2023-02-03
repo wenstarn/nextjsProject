@@ -128,4 +128,5 @@ export interface MyAnimeListItem {
   score: number
   watchedEpisodes: number
   category: string
+  episodes: number
 }
